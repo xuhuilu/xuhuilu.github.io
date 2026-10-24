@@ -19,6 +19,7 @@ page = page.replace('src="profile.jpg"', 'src="data:image/jpeg;base64,' + photo 
 page = page.replace('href="cv.pdf"', 'href="https://xuhuilu.github.io/cv.pdf"')
 output = root / 'previews'
 output.mkdir(exist_ok=True)
+page = '\n'.join(line.rstrip() for line in page.splitlines()) + '\n'
 (output / 'academic-homepage.html').write_text(page)
 (output / 'mobile.html').write_text('''<!doctype html><html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Xuhui Lu — Phone Preview</title>
