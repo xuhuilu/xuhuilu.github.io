@@ -69,6 +69,8 @@
       updatedElement.textContent = "Analytics not connected";
       return [];
     }
+    const section = document.getElementById("visitors");
+    if (section) section.hidden = false;
     const locations = Array.isArray(data.locations) ? data.locations.filter(item => item && item.code && Number(item.visitors) > 0) : [];
     totalElement.textContent = numberFormat.format(Number(data.total_visitors) || 0);
     const updated = new Date(data.generated_at);
