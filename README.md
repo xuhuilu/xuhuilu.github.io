@@ -2,7 +2,7 @@
 
 Personal academic homepage: https://xuhuilu.github.io/
 
-A dependency-free, responsive academic page with a warm paper palette, research-focused editorial layout, and optional country-level visitor statistics.
+A dependency-free academic page with a fixed profile sidebar, white reading column, blue links, system fonts, and responsive navigation. Publications appear once each, with published articles and manuscripts under review separated.
 
 ## Update the website
 
@@ -16,7 +16,7 @@ Run `python -m http.server 8000` in this directory, then open `http://localhost:
 
 The visitor module uses **GoatCounter aggregate statistics** and **Tencent Maps**. It displays only country-level counts at approximate country anchors—not individual visitors or precise coordinates. GoatCounter states that it does not store IP addresses or use tracking cookies; see its [privacy policy](https://www.goatcounter.com/help/privacy).
 
-The map and counters remain in a clearly labelled unconfigured state until you complete these steps:
+The visitor section stays hidden until `data/visitor-stats.json` contains an export timestamp. Existing data and configuration are preserved. To enable it:
 
 1. Create a GoatCounter site for `xuhuilu.github.io`. In its settings, disable individual pageview collection and any statistics categories you do not need. Generate a read-only API token under **Username → API**.
 2. In the GitHub repository, open **Settings → Secrets and variables → Actions**:
@@ -27,3 +27,7 @@ The map and counters remain in a clearly labelled unconfigured state until you c
 5. Open **Actions → Update aggregate visitor statistics → Run workflow** for the first export. It subsequently updates `data/visitor-stats.json` weekly. The export script uses only the standard Python library; the token stays in GitHub Secrets and is never shipped to browsers.
 
 To test the export locally, set `GOATCOUNTER_CODE` and `GOATCOUNTER_TOKEN` in your shell environment and run `python scripts/export_visitor_stats.py`. Without those variables it exits safely without changing the data file.
+
+## Reviewing this redesign
+
+Changes belong to `design/academic-homepage-refined`; merging its PR into `main` publishes the redesign. Versioned CSS and interaction URLs avoid reusing cached assets from previous layouts. System fonts remove the Google Fonts dependency.
