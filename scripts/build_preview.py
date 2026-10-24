@@ -1,6 +1,7 @@
 """Build self-contained desktop and phone previews from the production sources."""
 from pathlib import Path
 import base64
+import html
 import re
 
 root = Path(__file__).resolve().parent.parent
@@ -22,5 +23,5 @@ output.mkdir(exist_ok=True)
 (output / 'mobile.html').write_text('''<!doctype html><html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Xuhui Lu — Phone Preview</title>
 <style>body{margin:0;background:#edf0f6;display:grid;place-items:center;min-height:100vh}iframe{width:390px;max-width:100vw;height:844px;max-height:100dvh;border:1px solid #cdd4e1;border-radius:8px;background:white}</style>
-<iframe src="academic-homepage.html" title="390-pixel mobile preview of Xuhui Lu's homepage"></iframe></html>''')
+<iframe srcdoc="PREVIEW_DOCUMENT" title="390-pixel mobile preview of Xuhui Lu's homepage"></iframe></html>'''.replace("PREVIEW_DOCUMENT", html.escape(page, quote=True)))
 print('Built previews/academic-homepage.html and previews/mobile.html')

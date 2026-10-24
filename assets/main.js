@@ -23,7 +23,7 @@
   if (mobile.addEventListener) mobile.addEventListener('change', onResize);
   else if (mobile.addListener) mobile.addListener(onResize);
 
-  const sectionMap = links.map(link => [link, document.querySelector(link.getAttribute('href'))]).filter(pair => pair[1]);
+  const sectionMap = links.map(link => [link, document.getElementById(link.hash.slice(1))]).filter(pair => pair[1]);
   if (!('IntersectionObserver' in window)) return;
   const observer = new IntersectionObserver(entries => {
     const visible = entries.filter(x => x.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
